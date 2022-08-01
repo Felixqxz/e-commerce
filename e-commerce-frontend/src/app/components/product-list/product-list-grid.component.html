@@ -5,8 +5,12 @@
 
                 <div *ngFor="let product of products" class="col-md-3">
                     <div class="product-box">
-                        <img src="{{ product.imageUrl }}" class="img-responsive">
-                        <h1>{{ product.name }}</h1>
+                        <a routerLink="/products/{{ product.id }}">
+                            <img src="{{ product.imageUrl }}" class="img-responsive">
+                        </a>
+                        <a routerLink="/products/{{ product.id }}">
+                            <h1>{{ product.name }}</h1>
+                        </a>
                         <div class="price">{{ product.unitPrice | currency:'USD' }}</div>
                         <a href="#" class="btn btn-primary">Add to cart</a>
 
@@ -19,6 +23,38 @@
                 </div>
 
             </div>
+
+            <!-- footer pagination -->
+            <div class="foter-pagination">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9" style="padding-left: 30%">
+                                <ngb-pagination [(page)]="pageNumber"
+                                                [pageSize]="pageSize"
+                                                [collectionSize]="totalElements"
+                                                [maxSize]="5"
+                                                [boundaryLinks]="true"
+                                                (pageChange)="listProducts()">
+                                </ngb-pagination>
+                            </div>
+
+                            <div class="col-md-3 mt-2" style="text-align: right;">
+                                <span class="mr-2">Page Size</span>
+
+                                <select (change)="updatePageSize($event)">
+                                    <option selected="true">5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
