@@ -1,2 +1,7 @@
-package com.felix.ecommerce.dao;public interface CustomerRepository {
+package com.felix.ecommerce.dao;
+
+import com.felix.ecommerce.entity.Customer;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 }

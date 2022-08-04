@@ -1,2 +1,10 @@
-package com.felix.ecommerce.dto;public class PurchaseResponse {
+package com.felix.ecommerce.dto;
+
+import lombok.Data;
+
+@Data
+public class PurchaseResponse {
+
+    private final String orderTrackingNumber;
+
 }

@@ -1,2 +1,26 @@
-package com.felix.ecommerce.controller;public class CheckoutController {
+package com.felix.ecommerce.controller;
+
+import com.felix.ecommerce.dto.Purchase;
+import com.felix.ecommerce.dto.PurchaseResponse;
+import com.felix.ecommerce.service.CheckoutService;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin("http://localhost:4200")
+@RestController
+@RequestMapping("/api/checkout")
+public class CheckoutController {
+
+    private CheckoutService checkoutService;
+
+    public CheckoutController(CheckoutService checkoutService) {
+        this.checkoutService = checkoutService;
+    }
+
+    @PostMapping("/purchase")
+    public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
+        
+        PurchaseResponse purchaseResponse = checkoutService.placeOrder(purchase);
+
+        return purchaseResponse;
+    }
 }
