@@ -5,6 +5,7 @@ import com.felix.ecommerce.entity.Product;
 import com.felix.ecommerce.entity.ProductCategory;
 import com.felix.ecommerce.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -23,6 +24,8 @@ import java.util.Set;
 @Configuration
 public class MyDataRestConfig implements RepositoryRestConfigurer {
 
+    @Value("${allowed.origins}")
+    private String[] allowedOrigins;
     private EntityManager entityManager;
 
     @Autowired
@@ -32,7 +35,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
 
-        HttpMethod[] unsupportedActions = {HttpMethod.DELETE, HttpMethod.PUT, HttpMethod.POST};
+        HttpMethod[] unsupportedActions = {HttpMethod.DELETE, HttpMethod.PUT, HttpMethod.POST, HttpMethod.PATCH};
 
         disableHttpMethods(Product.class, config, unsupportedActions);
         disableHttpMethods(ProductCategory.class, config, unsupportedActions);
@@ -41,6 +44,8 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
 
         // call an internal helper method to expose ids
         exposeIds(config);
+
+        cors.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedOrigins);
     }
 
     private void disableHttpMethods(Class theClass, RepositoryRestConfiguration config, HttpMethod[] unsupportedActions) {

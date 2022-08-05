@@ -5,7 +5,6 @@ import com.felix.ecommerce.dto.PurchaseResponse;
 import com.felix.ecommerce.service.CheckoutService;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/checkout")
 public class CheckoutController {
@@ -18,7 +17,7 @@ public class CheckoutController {
 
     @PostMapping("/purchase")
     public PurchaseResponse placeOrder(@RequestBody Purchase purchase) {
-        
+
         PurchaseResponse purchaseResponse = checkoutService.placeOrder(purchase);
 
         return purchaseResponse;
