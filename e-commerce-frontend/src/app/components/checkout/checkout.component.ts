@@ -243,7 +243,7 @@ export class CheckoutComponent implements OnInit {
                 }
               })
             }            
-          }.bind(this));
+          }).bind(this);
         }
       );
     } else {

@@ -28,13 +28,13 @@ import {
 import myAppConfig from './config/my-app-config';
 import { MembersPageComponent } from './components/members-page/members-page.component';
 
-// const oktaConfig = Object.assign({
-//   onAuthRequired: (oktaAuth, injector: any) => {
-//     const router = injector.get(Router);
+const oktaConfig = Object.assign({
+  onAuthRequired: (oktaAuth: any, injector: any) => {
+    const router = injector.get(Router);
 
-//     router.navigate(['/login']);
-//   }
-// }, myAppConfig.oidc);
+    router.navigate(['/login']);
+  }
+}, myAppConfig.oidc);
 
 const routes: Routes = [
   {path: 'members', component: MembersPageComponent, canActivate: [ OktaAuthGuard ]},
@@ -74,7 +74,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     OktaAuthModule
   ],
-  // providers: [ProductService, { provide: OKTA_CONFIG, useValue: oktaConfig }],
+  providers: [ProductService, { provide: OKTA_CONFIG, useValue: oktaConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

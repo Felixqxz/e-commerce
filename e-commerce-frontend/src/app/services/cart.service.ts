@@ -16,7 +16,7 @@ export class CartService {
 
   constructor() {
 
-    let data = JSON.parse(this.storage.getItem('items') ?? "");
+    let data = JSON.parse(this.storage.getItem('items')!);
 
     if (data != null) {
       this.cartItems = data;
@@ -79,6 +79,7 @@ export class CartService {
   }
 
   persistCartItems() {
+    console.log(this.cartItems);
     this.storage.setItem('items', JSON.stringify(this.cartItems));
   }
 }
