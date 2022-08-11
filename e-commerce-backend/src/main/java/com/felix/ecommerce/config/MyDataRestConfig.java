@@ -1,9 +1,6 @@
 package com.felix.ecommerce.config;
 
-import com.felix.ecommerce.entity.Country;
-import com.felix.ecommerce.entity.Product;
-import com.felix.ecommerce.entity.ProductCategory;
-import com.felix.ecommerce.entity.State;
+import com.felix.ecommerce.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -41,6 +38,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, unsupportedActions);
         disableHttpMethods(Country.class, config, unsupportedActions);
         disableHttpMethods(State.class, config, unsupportedActions);
+        disableHttpMethods(Order.class, config, unsupportedActions);
 
         // call an internal helper method to expose ids
         exposeIds(config);
